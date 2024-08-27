@@ -58,7 +58,7 @@ def save_video(video_writer, img):
     """
     video_writer.write(img)
 
-def main(video_source=0, save=False, output_path="saved_output/output_video.mp4"):
+def main(video_source=0, save=False, output_path=None):
     """Main function to perform pose detection on video source.
 
     Args:
@@ -78,6 +78,8 @@ def main(video_source=0, save=False, output_path="saved_output/output_video.mp4"
 
     # Set up video writer if saving is enabled
     if save:
+        if output_path is None:  # Check if output_path is provided
+            output_path = "saved_output/output_video.mp4"  # Default output path
         # Create the directory if it doesn't exist
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Codec for .mp4 format
@@ -117,5 +119,9 @@ def main(video_source=0, save=False, output_path="saved_output/output_video.mp4"
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
+
     # Default video source is a webcam (index 0), but can be replaced with a video file path
-    main("videos/video_01.mp4", save=False)
+    file_path = "videos/video_01.mp4"
+    output_path = f"saved_output/output_{os.path.basename(file_path)}" # Correct output path
+
+    main(file_path, save=True, output_path=output_path)  # Corrected 'save' argument
