@@ -9,7 +9,6 @@ hands = mpHands.Hands()
 mpDraw = mp.solutions.drawing_utils
 
 pTime = 0
-
 while True:
     sucess, img = cap.read()
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
